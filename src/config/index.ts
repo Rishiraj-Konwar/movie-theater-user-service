@@ -1,2 +1,2 @@
 export {connectDB} from "./db.config"
-export {auth} from "./auth.config"
+export {setAuth} from "./auth.config"
