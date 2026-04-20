@@ -9,6 +9,7 @@ const port = process.env.PORT
 
 await connectDB()
 
+
 app.get("/", (req, res) => {
   res.send("Hello from the user service")
 })
