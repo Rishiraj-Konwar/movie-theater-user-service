@@ -41,5 +41,5 @@ export const auth = betterAuth({
       }
     })
   ],
-  trustedOrigins: ["http://localhost:8080"]
+  trustedOrigins: [process.env.API_GATEWAY_URL as string]
 })
