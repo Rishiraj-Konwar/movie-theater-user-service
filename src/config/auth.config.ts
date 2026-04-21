@@ -40,5 +40,6 @@ export const auth = betterAuth({
         rotationInterval: 60 * 60 * 24 * 7
       }
     })
-  ]
+  ],
+  trustedOrigins: ["http://localhost:8080"]
 })
