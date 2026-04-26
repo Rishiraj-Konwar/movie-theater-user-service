@@ -4,7 +4,7 @@ import { mongoClientDb } from "./index"
 import { mongodbAdapter } from "@better-auth/mongo-adapter"
 
 export const auth = betterAuth({
-  database: mongodbAdapter(mongoClientDb()),
+  database: mongodbAdapter(mongoClientDb().db()),
   emailAndPassword: {
     enabled: true
   },

@@ -12,4 +12,4 @@ export const connectDB = async () => {
   }
 }
 
-export const mongoClientDb = () => { return mongoose.connection.getClient().db()}
+export const mongoClientDb = () => { return mongoose.connection.getClient()}
