@@ -30,7 +30,8 @@ export const auth = betterAuth({
             email: user.email,
             role: user.role
           }
-        }
+        },
+        expirationTime:"30m" 
       },
       jwks: {
         keyPairConfig: {
