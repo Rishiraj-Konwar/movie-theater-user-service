@@ -13,7 +13,8 @@ await connectDB();
 const auth = setAuth();
 
 app.use(express.json());
-app.all("/*", toNodeHandler(auth));
+
+app.all("/:path*", toNodeHandler(auth));
 
 app.listen(port, () => {
   console.log(`user service running at http://localhost:${port}`);
