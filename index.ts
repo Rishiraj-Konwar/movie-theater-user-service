@@ -14,7 +14,7 @@ const auth = setAuth();
 
 app.use(express.json());
 
-app.all("/:path*", toNodeHandler(auth));
+app.all("/api/auth/*splat", toNodeHandler(auth));
 
 app.listen(port, () => {
   console.log(`user service running at http://localhost:${port}`);
