@@ -43,6 +43,6 @@ export const setAuth = () => {
         },
       }),
     ],
-    trustedOrigins: [process.env.API_GATEWAY_URL as string],
+    trustedOrigins: [process.env.API_GATEWAY_URL as string]
   });
 };

@@ -11,10 +11,10 @@ const port = process.env.PORT;
 
 await connectDB();
 const auth = setAuth();
-
-app.use(express.json());
-
-app.all("/api/auth/*splat", toNodeHandler(auth));
+app.get("/", (req, res) => {
+  res.send("This is the user service")
+})
+app.all("/api/auth/*path", toNodeHandler(auth));
 
 app.listen(port, () => {
   console.log(`user service running at http://localhost:${port}`);
