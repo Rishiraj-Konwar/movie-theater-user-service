@@ -27,12 +27,14 @@ export const setAuth = () => {
         jwt: {
           definePayload: ({ user }) => {
             return {
-              id: user.id,
+              sub: user.id,
               email: user.email,
               role: user.role,
             };
           },
           expirationTime: "30m",
+          issuer: `http://localhost:${process.env.PORT}`,
+          audience: process.env.API_GATEWAY_URL
         },
         jwks: {
           keyPairConfig: {
