@@ -1,12 +1,5 @@
 import mongoose from "mongoose";
-import type { Document } from "mongoose";
-
-export interface UserDoc extends Document{
-  id: string,
-  name: string,
-  email: string,
-  role: string
-}
+import type { UserDoc } from "../types";
 
 const userSchema = new mongoose.Schema<UserDoc>({
   email: {
@@ -28,4 +21,4 @@ const userSchema = new mongoose.Schema<UserDoc>({
   strict: false
 })
 
-export const userModel = mongoose.model("user", userSchema)
+export const UserModel = mongoose.model("user", userSchema)
