@@ -1,3 +1,4 @@
+import { StatusCodes } from "http-status-codes";
 import type { IUserRepository, UserDoc } from "../types";
 import { AppError } from "../utils";
 import { usTryCatch } from "../utils";
@@ -16,7 +17,12 @@ export function UserService(userRepo: IUserRepository) {
       id: string,
       data: Partial<UserDoc>,
     ): Promise<UserDoc | AppError> {
-      return usTryCatch(() => userRepo.updateUser(id, data));
+      return usTryCatch(() => {
+        if (data.id){
+          throw new AppError("Cannot change the id", StatusCodes.BAD_REQUEST)
+        }
+        return userRepo.updateUser(id, data)
+      });
     },
 
     async deleteUser(id: string): Promise<UserDoc | AppError> {
