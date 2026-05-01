@@ -5,7 +5,7 @@ import type { IUserRepository } from "../types";
 import { SuccessResponse } from "../utils";
 import { StatusCodes } from "http-status-codes";
 
-function userController(userRepo: IUserRepository) {
+export function userController(userRepo: IUserRepository) {
   const userService = UserService(userRepo);
   return {
     getUser: ucTryCatch(async (req: Request, res: Response) => {
@@ -13,7 +13,14 @@ function userController(userRepo: IUserRepository) {
       const user = await userService.getUser(id);
       SuccessResponse.data = { user: user };
       res.status(StatusCodes.OK).json(SuccessResponse);
+      return
     }),
-    
+    getUserByEmail: ucTryCatch(async (req: Request, res: Response) => {
+      const email = req.headers["x-user-email"] as string
+      const user = await userService.getUserByEmail(email)
+      SuccessResponse.data = {user: user}
+      res.status(StatusCodes.OK).json(SuccessResponse)
+      return
+    })
   };
 }
