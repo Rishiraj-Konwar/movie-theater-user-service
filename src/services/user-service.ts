@@ -1,42 +1,26 @@
-import { StatusCodes } from "http-status-codes";
 import type { IUserRepository, UserDoc } from "../types";
 import { AppError } from "../utils";
-export class UserService {
-  private userRepo: IUserRepository;
-  constructor(userRepo: IUserRepository) {
-    //using dependency injection here. Practising the Strategy pattern
-    this.userRepo = userRepo;
-  }
+import { usTryCatch } from "../utils";
+//using dependency injection here. Practising the Strategy pattern
+export async function UserService(userRepo: IUserRepository) {
+  return {
+    getUser(id: string): Promise<UserDoc | AppError> {
+      return usTryCatch(() => userRepo.getUser(id));
+    },
 
-  private async execute(task: () => Promise<UserDoc | null>): Promise<UserDoc | AppError>{
-    try{
-      const response = await task()
-      if (!response){
-        throw new AppError("User not found", StatusCodes.NOT_FOUND)
-      }
-      return response
-    }catch(err){
-      if (err instanceof AppError) throw err
-      throw new AppError("Internal Server Error", StatusCodes.INTERNAL_SERVER_ERROR)
-    }
-  }
+    getUserByEmail(email: string): Promise<UserDoc | AppError> {
+      return usTryCatch(() => userRepo.getUserByEmail(email));
+    },
 
-  async getUser(id: string): Promise<UserDoc | AppError> {
-    return this.execute(() => this.userRepo.getUser(id))
-  }
+    updateUser(
+      id: string,
+      data: Partial<UserDoc>,
+    ): Promise<UserDoc | AppError> {
+      return usTryCatch(() => userRepo.updateUser(id, data));
+    },
 
-  async getUserByEmail(email: string): Promise<UserDoc | AppError> {
-    return this.execute(() => this.userRepo.getUserByEmail(email))
-  }
-
-  async updateUser(
-    id: string,
-    data: Partial<UserDoc>,
-  ): Promise<UserDoc | AppError> {
-    return this.execute(() => this.userRepo.updateUser(id, data))
-  }
-
-  async deleteUser(id: string): Promise<UserDoc | AppError> {
-    return this.execute(() => this.userRepo.deleteUser(id))
-  }
+    deleteUser(id: string): Promise<UserDoc | AppError> {
+      return usTryCatch(() => userRepo.deleteUser(id));
+    },
+  };
 }
