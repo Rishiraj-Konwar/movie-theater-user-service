@@ -1,5 +1,5 @@
 export interface UserDoc {
-  id: string,
+  readonly id: string,
   name: string,
   email: string,
   role: string
