@@ -13,7 +13,6 @@ export async function usTryCatch(task: () => Promise<UserDoc | null>): Promise<U
       return response
     }catch(err){
       if (err instanceof AppError) throw err
-      console.log(err)
       throw new AppError("Internal Server Error", StatusCodes.INTERNAL_SERVER_ERROR)
     }
 }
