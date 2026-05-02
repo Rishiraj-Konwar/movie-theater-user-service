@@ -13,7 +13,7 @@ const port = process.env.PORT;
 await connectDB();
 
 const auth = setAuth();
-
+app.use(express.json())
 app.get("/", (req, res) => {
   res.send("This is the user service")
 })

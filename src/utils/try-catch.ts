@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes"
 import type {Request, Response, NextFunction, RequestHandler} from "express"
 import { ErrorResponse } from "./error-response"
 
-export async function usTryCatch(task: () => Promise<UserDoc | null>): Promise<UserDoc | AppError>{
+export async function usTryCatch(task: () => Promise<UserDoc | null>): Promise<UserDoc>{
     try{
       const response = await task()
       if (!response){
@@ -13,6 +13,7 @@ export async function usTryCatch(task: () => Promise<UserDoc | null>): Promise<U
       return response
     }catch(err){
       if (err instanceof AppError) throw err
+      console.log(err)
       throw new AppError("Internal Server Error", StatusCodes.INTERNAL_SERVER_ERROR)
     }
 }
