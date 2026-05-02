@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./src/config";
 import { setAuth } from "./src/config";
 import { toNodeHandler } from "better-auth/node";
+import { userRouter } from "./src/routes/user-routes";
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ app.get("/", (req, res) => {
   res.send("This is the user service")
 })
 app.all("/api/auth/*path", toNodeHandler(auth));
+
+app.use("/users", userRouter)
 
 app.listen(port, () => {
   console.log(`user service running at http://localhost:${port}`);

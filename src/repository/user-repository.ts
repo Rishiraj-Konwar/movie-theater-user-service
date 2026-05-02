@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { UserModel } from "../models/user-model";
 import type { IUserRepository, UserDoc } from "../types";
 
-export const UserRepository: IUserRepository = {
+export const mongoUserRepository: IUserRepository = { //adapter pattern
 
   async getUser(id: string): Promise<UserDoc | null>{
     const user = await UserModel.findById(id)

@@ -6,7 +6,7 @@ import { SuccessResponse } from "../utils";
 import { StatusCodes } from "http-status-codes";
 
 export function userController(userRepo: IUserRepository) {
-  const userService = UserService(userRepo);
+  const userService = UserService(userRepo); // dependency injection
   return {
     getUser: ucTryCatch(async (req: Request, res: Response) => {
       const id = req.headers["x-user-id"] as string;

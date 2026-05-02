@@ -2,6 +2,8 @@ import { StatusCodes } from "http-status-codes";
 import type { IUserRepository, UserDoc } from "../types";
 import { AppError } from "../utils";
 import { usTryCatch } from "../utils";
+
+
 //using dependency injection here. Practising the Strategy pattern
 export function UserService(userRepo: IUserRepository) {
   return {
